@@ -22,17 +22,17 @@ import coins from "./coins";
 
 import chat from "./chat";
 
-import dream-analysis from "./dream-analysis";
+import dreamAnalysis from "./dream-analysis";
 
-import love-compatibility from "./love-compatibility";
+import loveCompatibility from "./love-compatibility";
 
-import love-advice from "./love-advice";
+import loveAdvice from "./love-advice";
 
-import fast-energy-cleansing from "./fast-energy-cleansing";
+import fastEnergyCleansing from "./fast-energy-cleansing";
 
 import revelations from "./revelations";
 
-import coin-history from "./coin-history";
+import coinHistory from "./coin-history";
 
 import onboarding from "./onboarding";
 
@@ -52,7 +52,7 @@ import explorejourney from "./explorejourney";
 
 import chataura from "./chataura";
 
-import love-destiny from "./love-destiny";
+import loveDestiny from "./love-destiny";
 
 import guides from "./guides";
 
@@ -60,15 +60,15 @@ import offerchat from "./offerchat";
 
 import thanks from "./thanks";
 
-import compatibility-revelation from "./compatibility-revelation";
+import compatibilityRevelation from "./compatibility-revelation";
 
-import love-compass from "./love-compass";
+import loveCompass from "./love-compass";
 
-import cosmic-match from "./cosmic-match";
+import cosmicMatch from "./cosmic-match";
 
-import daily-tarot from "./daily-tarot";
+import dailyTarot from "./daily-tarot";
 
-import yes-or-no from "./yes-or-no";
+import yesOrNo from "./yes-or-no";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -95,18 +95,18 @@ const PAGES = {
     coins: coins,
     
     chat: chat,
-    
-    dream-analysis: dream-analysis,
-    
-    love-compatibility: love-compatibility,
-    
-    love-advice: love-advice,
-    
-    fast-energy-cleansing: fast-energy-cleansing,
-    
+
+    'dream-analysis': dreamAnalysis,
+
+    'love-compatibility': loveCompatibility,
+
+    'love-advice': loveAdvice,
+
+    'fast-energy-cleansing': fastEnergyCleansing,
+
     revelations: revelations,
-    
-    coin-history: coin-history,
+
+    'coin-history': coinHistory,
     
     onboarding: onboarding,
     
@@ -125,24 +125,24 @@ const PAGES = {
     explorejourney: explorejourney,
     
     chataura: chataura,
-    
-    love-destiny: love-destiny,
-    
+
+    'love-destiny': loveDestiny,
+
     guides: guides,
-    
+
     offerchat: offerchat,
-    
+
     thanks: thanks,
-    
-    compatibility-revelation: compatibility-revelation,
-    
-    love-compass: love-compass,
-    
-    cosmic-match: cosmic-match,
-    
-    daily-tarot: daily-tarot,
-    
-    yes-or-no: yes-or-no,
+
+    'compatibility-revelation': compatibilityRevelation,
+
+    'love-compass': loveCompass,
+
+    'cosmic-match': cosmicMatch,
+
+    'daily-tarot': dailyTarot,
+
+    'yes-or-no': yesOrNo,
     
 }
 
@@ -193,17 +193,17 @@ function PagesContent() {
                 
                 <Route path="/chat" element={<chat />} />
                 
-                <Route path="/dream-analysis" element={<dream-analysis />} />
-                
-                <Route path="/love-compatibility" element={<love-compatibility />} />
-                
-                <Route path="/love-advice" element={<love-advice />} />
-                
-                <Route path="/fast-energy-cleansing" element={<fast-energy-cleansing />} />
-                
+                <Route path="/dream-analysis" element={<dreamAnalysis />} />
+
+                <Route path="/love-compatibility" element={<loveCompatibility />} />
+
+                <Route path="/love-advice" element={<loveAdvice />} />
+
+                <Route path="/fast-energy-cleansing" element={<fastEnergyCleansing />} />
+
                 <Route path="/revelations" element={<revelations />} />
-                
-                <Route path="/coin-history" element={<coin-history />} />
+
+                <Route path="/coin-history" element={<coinHistory />} />
                 
                 <Route path="/onboarding" element={<onboarding />} />
                 
@@ -223,23 +223,23 @@ function PagesContent() {
                 
                 <Route path="/chataura" element={<chataura />} />
                 
-                <Route path="/love-destiny" element={<love-destiny />} />
-                
+                <Route path="/love-destiny" element={<loveDestiny />} />
+
                 <Route path="/guides" element={<guides />} />
-                
+
                 <Route path="/offerchat" element={<offerchat />} />
-                
+
                 <Route path="/thanks" element={<thanks />} />
-                
-                <Route path="/compatibility-revelation" element={<compatibility-revelation />} />
-                
-                <Route path="/love-compass" element={<love-compass />} />
-                
-                <Route path="/cosmic-match" element={<cosmic-match />} />
-                
-                <Route path="/daily-tarot" element={<daily-tarot />} />
-                
-                <Route path="/yes-or-no" element={<yes-or-no />} />
+
+                <Route path="/compatibility-revelation" element={<compatibilityRevelation />} />
+
+                <Route path="/love-compass" element={<loveCompass />} />
+
+                <Route path="/cosmic-match" element={<cosmicMatch />} />
+
+                <Route path="/daily-tarot" element={<dailyTarot />} />
+
+                <Route path="/yes-or-no" element={<yesOrNo />} />
                 
             </Routes>
         </Layout>

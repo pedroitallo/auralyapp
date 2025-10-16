@@ -4,7 +4,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Home, Map, BookOpen, User, BookHeart } from "lucide-react";
-import { MixpanelProvider } from "./components/analytics/MixpanelProvider";
+import { MixpanelProvider } from "../components/analytics/MixpanelProvider";
 
 const navigationItems = [
   { title: "Home", url: createPageUrl("home"), icon: Home, target: "bottom-nav-home" },
