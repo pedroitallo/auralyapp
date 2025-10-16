@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { base44 } from '@/api/base44Client';
 
 // Function to get or create an anonymous ID
 const getAnonymousId = () => {
@@ -75,11 +74,7 @@ export const useMixpanel = () => {
             
             const anonymousId = getAnonymousId();
 
-            await base44.functions.invoke('trackMixpanelEvent', {
-                event_name: eventName,
-                properties: pageProperties,
-                distinct_id: anonymousId
-            });
+            console.log('Tracking event:', eventName, pageProperties);
 
             // Reset failed attempts on success
             failedAttempts.current = 0;

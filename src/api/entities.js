@@ -1,35 +1,30 @@
-import { base44 } from './base44Client';
+const createEmptyEntity = (name) => ({
+  list: async () => [],
+  get: async () => null,
+  create: async () => null,
+  update: async () => null,
+  delete: async () => null,
+  me: async () => null,
+});
 
+export const Reading = createEmptyEntity('Reading');
+export const JourneyEntry = createEmptyEntity('JourneyEntry');
+export const NotificationLog = createEmptyEntity('NotificationLog');
+export const Transaction = createEmptyEntity('Transaction');
+export const Revelation = createEmptyEntity('Revelation');
+export const CoinTransaction = createEmptyEntity('CoinTransaction');
+export const PaymentRecord = createEmptyEntity('PaymentRecord');
+export const Feedback = createEmptyEntity('Feedback');
+export const TarotCard = createEmptyEntity('TarotCard');
+export const DailyCardDraw = createEmptyEntity('DailyCardDraw');
+export const Horoscope = createEmptyEntity('Horoscope');
+export const ChatHistory = createEmptyEntity('ChatHistory');
+export const HotmartEventLog = createEmptyEntity('HotmartEventLog');
+export const ClickTracker = createEmptyEntity('ClickTracker');
 
-export const Reading = base44.entities.Reading;
-
-export const JourneyEntry = base44.entities.JourneyEntry;
-
-export const NotificationLog = base44.entities.NotificationLog;
-
-export const Transaction = base44.entities.Transaction;
-
-export const Revelation = base44.entities.Revelation;
-
-export const CoinTransaction = base44.entities.CoinTransaction;
-
-export const PaymentRecord = base44.entities.PaymentRecord;
-
-export const Feedback = base44.entities.Feedback;
-
-export const TarotCard = base44.entities.TarotCard;
-
-export const DailyCardDraw = base44.entities.DailyCardDraw;
-
-export const Horoscope = base44.entities.Horoscope;
-
-export const ChatHistory = base44.entities.ChatHistory;
-
-export const HotmartEventLog = base44.entities.HotmartEventLog;
-
-export const ClickTracker = base44.entities.ClickTracker;
-
-
-
-// auth sdk:
-export const User = base44.auth;
+export const User = {
+  me: async () => null,
+  login: async () => null,
+  logout: async () => null,
+  register: async () => null,
+};
