@@ -163,84 +163,120 @@ function _getCurrentPage(url) {
 function PagesContent() {
     const location = useLocation();
     const currentPage = _getCurrentPage(location.pathname);
-    
+
+    const Admin = admin;
+    const Home = home;
+    const Reading = reading;
+    const Journey = journey;
+    const Guide = guide;
+    const Profile = profile;
+    const Feedback = feedback;
+    const Journeys = journeys;
+    const Chats = chats;
+    const Coins = coins;
+    const Chat = chat;
+    const DreamAnalysis = dreamAnalysis;
+    const LoveCompatibility = loveCompatibility;
+    const LoveAdvice = loveAdvice;
+    const FastEnergyCleansing = fastEnergyCleansing;
+    const Revelations = revelations;
+    const CoinHistory = coinHistory;
+    const Onboarding = onboarding;
+    const Mydivine = mydivine;
+    const Letterday = letterday;
+    const Magic = magic;
+    const Horoscope = horoscope;
+    const Managepayments = managepayments;
+    const Help = help;
+    const Explorejourney = explorejourney;
+    const Chataura = chataura;
+    const LoveDestiny = loveDestiny;
+    const Guides = guides;
+    const Offerchat = offerchat;
+    const Thanks = thanks;
+    const CompatibilityRevelation = compatibilityRevelation;
+    const LoveCompass = loveCompass;
+    const CosmicMatch = cosmicMatch;
+    const DailyTarot = dailyTarot;
+    const YesOrNo = yesOrNo;
+
     return (
         <Layout currentPageName={currentPage}>
-            <Routes>            
-                
-                    <Route path="/" element={<admin />} />
-                
-                
-                <Route path="/admin" element={<admin />} />
-                
-                <Route path="/home" element={<home />} />
-                
-                <Route path="/reading" element={<reading />} />
-                
-                <Route path="/journey" element={<journey />} />
-                
-                <Route path="/guide" element={<guide />} />
-                
-                <Route path="/profile" element={<profile />} />
-                
-                <Route path="/feedback" element={<feedback />} />
-                
-                <Route path="/journeys" element={<journeys />} />
-                
-                <Route path="/chats" element={<chats />} />
-                
-                <Route path="/coins" element={<coins />} />
-                
-                <Route path="/chat" element={<chat />} />
-                
-                <Route path="/dream-analysis" element={<dreamAnalysis />} />
+            <Routes>
 
-                <Route path="/love-compatibility" element={<loveCompatibility />} />
+                    <Route path="/" element={<Admin />} />
 
-                <Route path="/love-advice" element={<loveAdvice />} />
 
-                <Route path="/fast-energy-cleansing" element={<fastEnergyCleansing />} />
+                <Route path="/admin" element={<Admin />} />
 
-                <Route path="/revelations" element={<revelations />} />
+                <Route path="/home" element={<Home />} />
 
-                <Route path="/coin-history" element={<coinHistory />} />
-                
-                <Route path="/onboarding" element={<onboarding />} />
-                
-                <Route path="/mydivine" element={<mydivine />} />
-                
-                <Route path="/letterday" element={<letterday />} />
-                
-                <Route path="/magic" element={<magic />} />
-                
-                <Route path="/horoscope" element={<horoscope />} />
-                
-                <Route path="/managepayments" element={<managepayments />} />
-                
-                <Route path="/help" element={<help />} />
-                
-                <Route path="/explorejourney" element={<explorejourney />} />
-                
-                <Route path="/chataura" element={<chataura />} />
-                
-                <Route path="/love-destiny" element={<loveDestiny />} />
+                <Route path="/reading" element={<Reading />} />
 
-                <Route path="/guides" element={<guides />} />
+                <Route path="/journey" element={<Journey />} />
 
-                <Route path="/offerchat" element={<offerchat />} />
+                <Route path="/guide" element={<Guide />} />
 
-                <Route path="/thanks" element={<thanks />} />
+                <Route path="/profile" element={<Profile />} />
 
-                <Route path="/compatibility-revelation" element={<compatibilityRevelation />} />
+                <Route path="/feedback" element={<Feedback />} />
 
-                <Route path="/love-compass" element={<loveCompass />} />
+                <Route path="/journeys" element={<Journeys />} />
 
-                <Route path="/cosmic-match" element={<cosmicMatch />} />
+                <Route path="/chats" element={<Chats />} />
 
-                <Route path="/daily-tarot" element={<dailyTarot />} />
+                <Route path="/coins" element={<Coins />} />
 
-                <Route path="/yes-or-no" element={<yesOrNo />} />
-                
+                <Route path="/chat" element={<Chat />} />
+
+                <Route path="/dream-analysis" element={<DreamAnalysis />} />
+
+                <Route path="/love-compatibility" element={<LoveCompatibility />} />
+
+                <Route path="/love-advice" element={<LoveAdvice />} />
+
+                <Route path="/fast-energy-cleansing" element={<FastEnergyCleansing />} />
+
+                <Route path="/revelations" element={<Revelations />} />
+
+                <Route path="/coin-history" element={<CoinHistory />} />
+
+                <Route path="/onboarding" element={<Onboarding />} />
+
+                <Route path="/mydivine" element={<Mydivine />} />
+
+                <Route path="/letterday" element={<Letterday />} />
+
+                <Route path="/magic" element={<Magic />} />
+
+                <Route path="/horoscope" element={<Horoscope />} />
+
+                <Route path="/managepayments" element={<Managepayments />} />
+
+                <Route path="/help" element={<Help />} />
+
+                <Route path="/explorejourney" element={<Explorejourney />} />
+
+                <Route path="/chataura" element={<Chataura />} />
+
+                <Route path="/love-destiny" element={<LoveDestiny />} />
+
+                <Route path="/guides" element={<Guides />} />
+
+                <Route path="/offerchat" element={<Offerchat />} />
+
+                <Route path="/thanks" element={<Thanks />} />
+
+                <Route path="/compatibility-revelation" element={<CompatibilityRevelation />} />
+
+                <Route path="/love-compass" element={<LoveCompass />} />
+
+                <Route path="/cosmic-match" element={<CosmicMatch />} />
+
+                <Route path="/daily-tarot" element={<DailyTarot />} />
+
+                <Route path="/yes-or-no" element={<YesOrNo />} />
+
             </Routes>
         </Layout>
     );
