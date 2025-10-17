@@ -93,7 +93,7 @@ export default function Profile() {
         <div className="text-center space-y-3">
           <div className="flex justify-center items-center space-x-2">
             <Star className="w-6 h-6 text-purple-300" />
-            <h1 className="text-2xl font-light text-white">Your Profile</h1>
+            <h1 className="text-2xl font-light text-white">{user?.name || 'Your Profile'}</h1>
             <Moon className="w-6 h-6 text-yellow-300" />
           </div>
           <p className="text-purple-200 text-sm">
