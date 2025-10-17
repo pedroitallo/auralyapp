@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { User } from '@/api/entities';
+import { supabase } from '@/lib/supabase';
 
 const AuthContext = createContext(null);
 
@@ -20,9 +21,21 @@ export function AuthProvider({ children }) {
         };
 
         checkUserSession();
+
+        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) {
+                checkUserSession();
+            } else if (event === 'SIGNED_OUT') {
+                setUser(null);
+            }
+        });
+
+        return () => {
+            authListener?.subscription?.unsubscribe();
+        };
     }, []);
 
-    const value = { user, loading };
+    const value = { user, loading, setUser };
 
     return (
         <AuthContext.Provider value={value}>

@@ -20,14 +20,17 @@ export default function Login() {
     try {
       await User.login(email, password);
       toast.success("Login successful");
-      navigate("/home");
+
+      setTimeout(() => {
+        navigate("/home");
+        window.location.reload();
+      }, 500);
     } catch (error) {
       if (error.message === 'Email not registered') {
         toast.error("Email not registered. Please sign up first.");
       } else {
         toast.error(error.message || "Invalid credentials");
       }
-    } finally {
       setLoading(false);
     }
   };
