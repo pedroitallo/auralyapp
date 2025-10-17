@@ -1,4 +1,5 @@
 import Layout from "./Layout.jsx";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 import admin from "./admin";
 
@@ -216,10 +217,11 @@ function PagesContent() {
     const ResetPassword = resetpassword;
 
     return (
-        <Layout currentPageName={currentPage}>
-            <Routes>
+        <ProtectedRoute>
+            <Layout currentPageName={currentPage}>
+                <Routes>
 
-                    <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Home />} />
 
 
                 <Route path="/admin" element={<Admin />} />
@@ -299,7 +301,8 @@ function PagesContent() {
                 <Route path="/resetpassword" element={<ResetPassword />} />
 
             </Routes>
-        </Layout>
+            </Layout>
+        </ProtectedRoute>
     );
 }
 
