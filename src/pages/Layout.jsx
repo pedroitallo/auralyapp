@@ -50,7 +50,7 @@ const isAdminPage = () => {
 
 const isNoMenuPage = () => {
   const currentPath = window.location.pathname;
-  const noMenuPages = ['/chataura', '/offerchat', '/thanks'];
+  const noMenuPages = ['/chataura', '/offerchat', '/thanks', '/login', '/signup'];
   return noMenuPages.some(page => currentPath.startsWith(page));
 };
 

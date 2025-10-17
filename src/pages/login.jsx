@@ -23,8 +23,8 @@ export default function Login() {
 
         <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold text-gray-900">Bem-vindo de volta</h2>
-            <p className="text-sm text-gray-600 mt-2">Entre com suas credenciais</p>
+            <h2 className="text-2xl font-semibold text-gray-900">Welcome back</h2>
+            <p className="text-sm text-gray-600 mt-2">Sign in to your account</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -33,7 +33,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
-                placeholder="seu@email.com"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -42,7 +42,7 @@ export default function Login() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -55,7 +55,7 @@ export default function Login() {
             </div>
 
             <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white">
-              Entrar
+              Sign In
             </Button>
           </form>
 
@@ -64,24 +64,24 @@ export default function Login() {
               onClick={() => navigate("/forgot-password")}
               className="text-[#1C132F] hover:underline block w-full"
             >
-              Esqueci minha senha
+              Forgot password
             </button>
 
             <button
               onClick={() => navigate("/help")}
               className="text-gray-600 hover:underline block w-full"
             >
-              Preciso de ajuda
+              Need help
             </button>
 
             <div className="pt-4 border-t">
               <p className="text-gray-600">
-                Não tem uma conta?{" "}
+                Don't have an account?{" "}
                 <button
                   onClick={() => navigate("/signup")}
                   className="text-[#1C132F] hover:underline font-semibold"
                 >
-                  Criar conta
+                  Sign up
                 </button>
               </p>
             </div>

@@ -7,18 +7,18 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const zodiacSigns = [
-  { value: "aries", label: "Áries" },
-  { value: "taurus", label: "Touro" },
-  { value: "gemini", label: "Gêmeos" },
-  { value: "cancer", label: "Câncer" },
-  { value: "leo", label: "Leão" },
-  { value: "virgo", label: "Virgem" },
+  { value: "aries", label: "Aries" },
+  { value: "taurus", label: "Taurus" },
+  { value: "gemini", label: "Gemini" },
+  { value: "cancer", label: "Cancer" },
+  { value: "leo", label: "Leo" },
+  { value: "virgo", label: "Virgo" },
   { value: "libra", label: "Libra" },
-  { value: "scorpio", label: "Escorpião" },
-  { value: "sagittarius", label: "Sagitário" },
-  { value: "capricorn", label: "Capricórnio" },
-  { value: "aquarius", label: "Aquário" },
-  { value: "pisces", label: "Peixes" }
+  { value: "scorpio", label: "Scorpio" },
+  { value: "sagittarius", label: "Sagittarius" },
+  { value: "capricorn", label: "Capricorn" },
+  { value: "aquarius", label: "Aquarius" },
+  { value: "pisces", label: "Pisces" }
 ];
 
 export default function Signup() {
@@ -32,7 +32,7 @@ export default function Signup() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("As senhas não coincidem");
+      alert("Passwords do not match");
       return;
     }
   };
@@ -46,8 +46,8 @@ export default function Signup() {
 
         <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold text-gray-900">Criar conta</h2>
-            <p className="text-sm text-gray-600 mt-2">Comece sua jornada espiritual</p>
+            <h2 className="text-2xl font-semibold text-gray-900">Create account</h2>
+            <p className="text-sm text-gray-600 mt-2">Start your spiritual journey</p>
           </div>
 
           <form onSubmit={handleSignup} className="space-y-4">
@@ -56,7 +56,7 @@ export default function Signup() {
               <Input
                 id="email"
                 type="email"
-                placeholder="seu@email.com"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -65,7 +65,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Criar senha</Label>
+              <Label htmlFor="password">Create password</Label>
               <Input
                 id="password"
                 type="password"
@@ -78,7 +78,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Repetir senha</Label>
+              <Label htmlFor="confirmPassword">Confirm password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -91,10 +91,10 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="zodiacSign">Escolher signo</Label>
+              <Label htmlFor="zodiacSign">Choose zodiac sign</Label>
               <Select value={zodiacSign} onValueChange={setZodiacSign} required>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecione seu signo" />
+                  <SelectValue placeholder="Select your zodiac sign" />
                 </SelectTrigger>
                 <SelectContent>
                   {zodiacSigns.map((sign) => (
@@ -107,18 +107,18 @@ export default function Signup() {
             </div>
 
             <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white">
-              Criar conta
+              Create account
             </Button>
           </form>
 
           <div className="text-center text-sm pt-4 border-t">
             <p className="text-gray-600">
-              Já tem uma conta?{" "}
+              Already have an account?{" "}
               <button
                 onClick={() => navigate("/login")}
                 className="text-[#1C132F] hover:underline font-semibold"
               >
-                Entrar
+                Sign in
               </button>
             </p>
           </div>
