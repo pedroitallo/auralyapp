@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import AuralyLogo from "../components/common/AuralyLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,10 +23,24 @@ const zodiacSigns = [
 
 export default function Signup() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [zodiacSign, setZodiacSign] = useState("");
+  const [isPreFilled, setIsPreFilled] = useState(false);
+
+  useEffect(() => {
+    const urlName = searchParams.get("nome");
+    const urlEmail = searchParams.get("email");
+
+    if (urlName || urlEmail) {
+      if (urlName) setName(urlName);
+      if (urlEmail) setEmail(urlEmail);
+      setIsPreFilled(true);
+    }
+  }, [searchParams]);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -52,6 +66,20 @@ export default function Signup() {
 
           <form onSubmit={handleSignup} className="space-y-4">
             <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                disabled={isPreFilled}
+                className="w-full"
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -60,6 +88,7 @@ export default function Signup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isPreFilled}
                 className="w-full"
               />
             </div>
