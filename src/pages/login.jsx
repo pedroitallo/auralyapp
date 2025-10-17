@@ -12,6 +12,7 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    navigate("/home");
   };
 
   return (
@@ -61,24 +62,24 @@ export default function Login() {
 
           <div className="space-y-3 text-center text-sm">
             <button
-              onClick={() => navigate("/forgot-password")}
+              onClick={() => navigate("/resetpassword")}
               className="text-[#1C132F] hover:underline block w-full"
             >
               Forgot password
             </button>
 
-            <button
-              onClick={() => navigate("/help")}
+            <a
+              href="mailto:contact@auralyapp.com"
               className="text-gray-600 hover:underline block w-full"
             >
               Need help
-            </button>
+            </a>
 
             <div className="pt-4 border-t">
               <p className="text-gray-600">
                 Don't have an account?{" "}
                 <button
-                  onClick={() => navigate("/signup")}
+                  onClick={() => navigate("/quizonboarding")}
                   className="text-[#1C132F] hover:underline font-semibold"
                 >
                   Sign up

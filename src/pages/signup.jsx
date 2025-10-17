@@ -49,6 +49,8 @@ export default function Signup() {
       alert("Passwords do not match");
       return;
     }
+
+    navigate("/onboarding");
   };
 
   return (
