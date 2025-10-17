@@ -204,7 +204,7 @@ function PagesContent() {
         <Layout currentPageName={currentPage}>
             <Routes>
 
-                    <Route path="/" element={<Admin />} />
+                    <Route path="/" element={<Home />} />
 
 
                 <Route path="/admin" element={<Admin />} />
