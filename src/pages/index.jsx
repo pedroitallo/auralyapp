@@ -77,6 +77,10 @@ import signup from "./signup";
 
 import resetpassword from "./resetpassword";
 
+import quizonboarding from "./quizonboarding";
+
+import paywall from "./paywall";
+
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 const PAGES = {
@@ -157,6 +161,10 @@ const PAGES = {
 
     resetpassword: resetpassword,
 
+    quizonboarding: quizonboarding,
+
+    paywall: paywall,
+
 }
 
 function _getCurrentPage(url) {
@@ -215,6 +223,8 @@ function PagesContent() {
     const Login = login;
     const Signup = signup;
     const ResetPassword = resetpassword;
+    const QuizOnboarding = quizonboarding;
+    const Paywall = paywall;
 
     return (
         <ProtectedRoute>
@@ -299,6 +309,10 @@ function PagesContent() {
                 <Route path="/signup" element={<Signup />} />
 
                 <Route path="/resetpassword" element={<ResetPassword />} />
+
+                <Route path="/quizonboarding" element={<QuizOnboarding />} />
+
+                <Route path="/paywall" element={<Paywall />} />
 
             </Routes>
             </Layout>
