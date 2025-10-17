@@ -4,15 +4,42 @@ import AuralyLogo from "../components/common/AuralyLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { User } from "@/api/entities";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleResetPassword = (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setLoading(true);
+
+    try {
+      const emailExists = await User.checkEmailExists(email);
+
+      if (!emailExists) {
+        toast.error("Email not registered. Please sign up first.");
+        setLoading(false);
+        return;
+      }
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/resetpassword`,
+      });
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast.success("Password reset email sent");
+    } catch (error) {
+      toast.error(error.message || "Failed to send reset email");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,8 +73,8 @@ export default function ResetPassword() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white">
-                  Reset password
+                <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white" disabled={loading}>
+                  {loading ? "Sending..." : "Reset password"}
                 </Button>
               </form>
 

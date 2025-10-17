@@ -4,15 +4,32 @@ import AuralyLogo from "../components/common/AuralyLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { User } from "@/api/entities";
+import { toast } from "sonner";
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    navigate("/home");
+    setLoading(true);
+
+    try {
+      await User.login(email, password);
+      toast.success("Login successful");
+      navigate("/home");
+    } catch (error) {
+      if (error.message === 'Email not registered') {
+        toast.error("Email not registered. Please sign up first.");
+      } else {
+        toast.error(error.message || "Invalid credentials");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,8 +72,8 @@ export default function Login() {
               />
             </div>
 
-            <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white">
-              Sign In
+            <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white" disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 

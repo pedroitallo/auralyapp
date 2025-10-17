@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { User } from "@/api/entities";
+import { toast } from "sonner";
 
 const zodiacSigns = [
   { value: "aries", label: "Aries" },
@@ -30,6 +32,7 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [zodiacSign, setZodiacSign] = useState("");
   const [isPreFilled, setIsPreFilled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const urlName = searchParams.get("nome");
@@ -42,15 +45,39 @@ export default function Signup() {
     }
   }, [searchParams]);
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
-    navigate("/onboarding");
+    if (!zodiacSign) {
+      toast.error("Please select your zodiac sign");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await User.register({
+        email,
+        password,
+        name,
+        zodiacSign,
+      });
+      toast.success("Account created successfully");
+      navigate("/onboarding");
+    } catch (error) {
+      if (error.message === 'Email already registered') {
+        toast.error("Email already registered. Please login.");
+      } else {
+        toast.error(error.message || "Failed to create account");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -137,8 +164,8 @@ export default function Signup() {
               </Select>
             </div>
 
-            <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white">
-              Create account
+            <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white" disabled={loading}>
+              {loading ? "Creating account..." : "Create account"}
             </Button>
           </form>
 

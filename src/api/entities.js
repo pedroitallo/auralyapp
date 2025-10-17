@@ -22,9 +22,89 @@ export const ChatHistory = createEmptyEntity('ChatHistory');
 export const HotmartEventLog = createEmptyEntity('HotmartEventLog');
 export const ClickTracker = createEmptyEntity('ClickTracker');
 
+import { supabase } from '@/lib/supabase';
+
 export const User = {
-  me: async () => null,
-  login: async () => null,
-  logout: async () => null,
-  register: async () => null,
+  me: async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return null;
+
+    const { data } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', user.email)
+      .maybeSingle();
+
+    return data;
+  },
+
+  login: async (email, password) => {
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (!existingUser) {
+      throw new Error('Email not registered');
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
+    return data.user;
+  },
+
+  logout: async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  },
+
+  register: async ({ email, password, name, zodiacSign, gender, relationshipStatus }) => {
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (existingUser) {
+      throw new Error('Email already registered');
+    }
+
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (authError) throw authError;
+
+    const { data: userData, error: userError } = await supabase
+      .from('users')
+      .insert([{
+        email,
+        name,
+        zodiac_sign: zodiacSign,
+        gender,
+        relationship_status: relationshipStatus,
+      }])
+      .select()
+      .single();
+
+    if (userError) throw userError;
+
+    return userData;
+  },
+
+  checkEmailExists: async (email) => {
+    const { data } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    return !!data;
+  },
 };
