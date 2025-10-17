@@ -70,6 +70,10 @@ import dailyTarot from "./daily-tarot";
 
 import yesOrNo from "./yes-or-no";
 
+import login from "./login";
+
+import signup from "./signup";
+
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 const PAGES = {
@@ -143,7 +147,11 @@ const PAGES = {
     'daily-tarot': dailyTarot,
 
     'yes-or-no': yesOrNo,
-    
+
+    login: login,
+
+    signup: signup,
+
 }
 
 function _getCurrentPage(url) {
@@ -199,6 +207,8 @@ function PagesContent() {
     const CosmicMatch = cosmicMatch;
     const DailyTarot = dailyTarot;
     const YesOrNo = yesOrNo;
+    const Login = login;
+    const Signup = signup;
 
     return (
         <Layout currentPageName={currentPage}>
@@ -276,6 +286,10 @@ function PagesContent() {
                 <Route path="/daily-tarot" element={<DailyTarot />} />
 
                 <Route path="/yes-or-no" element={<YesOrNo />} />
+
+                <Route path="/login" element={<Login />} />
+
+                <Route path="/signup" element={<Signup />} />
 
             </Routes>
         </Layout>
