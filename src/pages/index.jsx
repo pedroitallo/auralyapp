@@ -74,6 +74,8 @@ import login from "./login";
 
 import signup from "./signup";
 
+import resetpassword from "./resetpassword";
+
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 const PAGES = {
@@ -152,6 +154,8 @@ const PAGES = {
 
     signup: signup,
 
+    resetpassword: resetpassword,
+
 }
 
 function _getCurrentPage(url) {
@@ -209,6 +213,7 @@ function PagesContent() {
     const YesOrNo = yesOrNo;
     const Login = login;
     const Signup = signup;
+    const ResetPassword = resetpassword;
 
     return (
         <Layout currentPageName={currentPage}>
@@ -290,6 +295,8 @@ function PagesContent() {
                 <Route path="/login" element={<Login />} />
 
                 <Route path="/signup" element={<Signup />} />
+
+                <Route path="/resetpassword" element={<ResetPassword />} />
 
             </Routes>
         </Layout>
