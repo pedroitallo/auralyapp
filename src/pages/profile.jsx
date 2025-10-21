@@ -1,14 +1,16 @@
 
 import React, { useState, useEffect } from "react";
 import { User } from "@/api/entities";
-import { Settings, Star, Moon, BookOpen, ChevronRight, Download } from "lucide-react";
+import { Settings, Star, Moon, Sun, BookOpen, ChevronRight, Download } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { UploadFile } from "@/api/integrations";
 import { useMixpanel } from '../components/analytics/useMixpanel';
+import { useTheme } from '@/contexts/ThemeContext';
 
-import AuralyLogo from "../components/common/AuralyLogo"; // Added import for AuralyLogo
+import AuralyLogo from "../components/common/AuralyLogo";
 import ProfileHeader from "../components/profile/ProfileHeader";
 import SettingsPanel from "../components/profile/SettingsPanel";
 import SupportSection from "../components/profile/SupportSection";
@@ -20,6 +22,7 @@ export default function Profile() {
   const [showAddToHomePopup, setShowAddToHomePopup] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const { track } = useMixpanel();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     // Track page view
@@ -104,10 +107,33 @@ export default function Profile() {
         {!showSettings ? (
           <div className="space-y-8">
             <ProfileHeader user={user} onEditClick={() => setShowSettings(true)} />
-            
-            <div className="px-1">
-              <Button 
-                variant="outline" 
+
+            <div className="space-y-3 px-1">
+              <div className="flex items-center justify-between p-4 bg-card rounded-xl border border-border shadow-sm">
+                <div className="flex items-center space-x-3">
+                  {theme === 'dark' ? (
+                    <Moon className="w-5 h-5 text-purple-400" />
+                  ) : (
+                    <Sun className="w-5 h-5 text-purple-600" />
+                  )}
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Switch theme appearance
+                    </p>
+                  </div>
+                </div>
+                <Switch
+                  checked={theme === 'dark'}
+                  onCheckedChange={toggleTheme}
+                  className="data-[state=checked]:bg-purple-600"
+                />
+              </div>
+
+              <Button
+                variant="outline"
                 className="w-full bg-white/5 border-white/20 text-purple-200 hover:bg-white/10 rounded-xl"
                 onClick={handleDownloadClick}
               >
