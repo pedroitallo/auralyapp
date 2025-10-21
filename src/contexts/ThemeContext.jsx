@@ -25,19 +25,32 @@ export const ThemeProvider = ({ children }) => {
       const user = await User.me();
       if (user?.theme_preference) {
         setTheme(user.theme_preference);
-        document.documentElement.classList.toggle('light', user.theme_preference === 'light');
+        applyTheme(user.theme_preference);
+      } else {
+        applyTheme('dark');
       }
     } catch (error) {
       console.error('Error loading theme preference:', error);
+      applyTheme('dark');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const applyTheme = (newTheme) => {
+    if (newTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
     }
   };
 
   const toggleTheme = async () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    document.documentElement.classList.toggle('light', newTheme === 'light');
+    applyTheme(newTheme);
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
