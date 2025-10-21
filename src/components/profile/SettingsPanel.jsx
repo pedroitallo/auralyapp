@@ -2,7 +2,9 @@ import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { X, Save, Upload } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { X, Save, Upload, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const zodiacSigns = [
   "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
@@ -10,6 +12,7 @@ const zodiacSigns = [
 ];
 
 export default function SettingsPanel({ user, onSave, onCancel, isSaving }) {
+  const { theme, toggleTheme } = useTheme();
   const [formData, setFormData] = useState({
     full_name: user?.full_name || '',
     zodiac_sign: user?.zodiac_sign || '',
@@ -103,6 +106,29 @@ export default function SettingsPanel({ user, onSave, onCancel, isSaving }) {
               ))}
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+          <div className="flex items-center space-x-3">
+            {theme === 'dark' ? (
+              <Moon className="w-5 h-5 text-purple-300" />
+            ) : (
+              <Sun className="w-5 h-5 text-purple-600" />
+            )}
+            <div>
+              <p className="text-sm font-medium text-foreground">
+                {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Switch between light and dark themes
+              </p>
+            </div>
+          </div>
+          <Switch
+            checked={theme === 'dark'}
+            onCheckedChange={toggleTheme}
+            className="data-[state=checked]:bg-purple-600"
+          />
         </div>
 
         <div className="flex space-x-3 pt-4">
