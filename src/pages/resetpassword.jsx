@@ -1,121 +1,163 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AuralyLogo from "../components/common/AuralyLogo";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { User } from "@/api/entities";
 import { supabase } from "@/lib/supabase";
-import { toast } from "sonner";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: "", text: "" });
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage({ type: "", text: "" });
 
     try {
-      const emailExists = await User.checkEmailExists(email);
-
-      if (!emailExists) {
-        toast.error("Email not registered. Please sign up first.");
-        setLoading(false);
-        return;
-      }
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/resetpassword`,
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
       });
 
       if (error) throw error;
 
-      setIsSubmitted(true);
-      toast.success("Password reset email sent");
+      setMessage({
+        type: "success",
+        text: "✓ Password changed successfully! You can now close this page and login."
+      });
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+
     } catch (error) {
-      toast.error(error.message || "Failed to send reset email");
+      setMessage({
+        type: "error",
+        text: `✗ Error: ${error.message}`
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1C132F] to-[#0F0A1A] flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <AuralyLogo className="mb-8" />
+    <div style={{
+      margin: 0,
+      boxSizing: 'border-box',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      background: 'linear-gradient(135deg, #f5f3f7 0%, #e9e5f0 100%)',
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px'
+    }}>
+      <div style={{
+        background: '#ffffff',
+        borderRadius: '24px',
+        padding: '48px',
+        maxWidth: '440px',
+        width: '100%',
+        boxShadow: '0 20px 60px rgba(123, 44, 191, 0.15)',
+        border: '1px solid rgba(123, 44, 191, 0.1)'
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>✨</div>
+          <h1 style={{
+            color: '#1a1a2e',
+            fontSize: '28px',
+            fontWeight: 600,
+            letterSpacing: '-0.5px',
+            marginBottom: '12px'
+          }}>Reset Your Password</h1>
+          <p style={{
+            color: '#4a4a6a',
+            fontSize: '15px',
+            lineHeight: '22px'
+          }}>Enter a new password for your Auraly account</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
-          {!isSubmitted ? (
-            <>
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-gray-900">Reset password</h2>
-                <p className="text-sm text-gray-600 mt-2">
-                  Enter your email and we'll send you a link to reset your password
-                </p>
-              </div>
+        <form onSubmit={handleResetPassword} style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '24px' }}>
+            <label htmlFor="new-password" style={{
+              display: 'block',
+              color: '#7b2cbf',
+              fontSize: '14px',
+              fontWeight: 600,
+              marginBottom: '8px'
+            }}>New Password</label>
+            <input
+              type="password"
+              id="new-password"
+              placeholder="Enter your new password"
+              minLength="6"
+              required
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '16px',
+                background: '#f5f3f7',
+                border: '2px solid rgba(123, 44, 191, 0.2)',
+                borderRadius: '12px',
+                color: '#1a1a2e',
+                fontSize: '16px',
+                transition: 'all 0.3s ease'
+              }}
+            />
+          </div>
 
-              <form onSubmit={handleResetPassword} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full"
-                  />
-                </div>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '16px',
+              background: 'linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 600,
+              letterSpacing: '0.5px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 8px 24px rgba(123, 44, 191, 0.25)',
+              opacity: loading ? 0.5 : 1
+            }}
+          >
+            {loading ? 'Resetting...' : 'Reset Password'}
+          </button>
+        </form>
 
-                <Button type="submit" className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white" disabled={loading}>
-                  {loading ? "Sending..." : "Reset password"}
-                </Button>
-              </form>
+        {message.text && (
+          <div style={{
+            marginTop: '24px',
+            padding: '16px',
+            borderRadius: '12px',
+            fontSize: '14px',
+            fontWeight: 500,
+            textAlign: 'center',
+            background: message.type === 'success'
+              ? 'rgba(5, 150, 105, 0.1)'
+              : 'rgba(220, 38, 38, 0.1)',
+            border: message.type === 'success'
+              ? '1px solid rgba(5, 150, 105, 0.3)'
+              : '1px solid rgba(220, 38, 38, 0.3)',
+            color: message.type === 'success' ? '#059669' : '#dc2626'
+          }}>
+            {message.text}
+          </div>
+        )}
 
-              <div className="text-center text-sm pt-4 border-t">
-                <button
-                  onClick={() => navigate("/login")}
-                  className="text-[#1C132F] hover:underline font-semibold"
-                >
-                  Back to login
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                <svg
-                  className="w-8 h-8 text-green-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">Check your email</h2>
-              <p className="text-sm text-gray-600">
-                We've sent a password reset link to <strong>{email}</strong>
-              </p>
-              <Button
-                onClick={() => navigate("/login")}
-                className="w-full bg-[#1C132F] hover:bg-[#2A1F45] text-white mt-6"
-              >
-                Back to login
-              </Button>
-            </div>
-          )}
+        <div style={{
+          marginTop: '32px',
+          paddingTop: '24px',
+          borderTop: '1px solid rgba(123, 44, 191, 0.15)',
+          textAlign: 'center',
+          color: '#6b7280',
+          fontSize: '13px'
+        }}>
+          ©️ 2025 Auraly. Your spiritual journey.
         </div>
       </div>
     </div>
