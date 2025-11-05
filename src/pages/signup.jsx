@@ -95,7 +95,7 @@ export default function Signup() {
 
           <form onSubmit={handleSignup} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name" className="text-gray-900">Name</Label>
               <Input
                 id="name"
                 type="text"
@@ -109,7 +109,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-900">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -123,7 +123,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Create password</Label>
+              <Label htmlFor="password" className="text-gray-900">Create password</Label>
               <Input
                 id="password"
                 type="password"
@@ -136,7 +136,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm password</Label>
+              <Label htmlFor="confirmPassword" className="text-gray-900">Confirm password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -149,7 +149,7 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="zodiacSign">Choose zodiac sign</Label>
+              <Label htmlFor="zodiacSign" className="text-gray-900">Choose zodiac sign</Label>
               <Select value={zodiacSign} onValueChange={setZodiacSign} required>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select your zodiac sign" />
