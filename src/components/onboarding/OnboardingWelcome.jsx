@@ -29,21 +29,9 @@ export default function OnboardingWelcome({ onNext }) {
 
   return (
     <div className="max-w-sm mx-auto text-center space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0 }}
-        className="space-y-4">
-        <h1 className="text-white text-2xl font-bold">Welcome Auraly App - Soulmate Map</h1>
-        <img
-          src="/Auraly-log3 png.png"
-          alt="Auraly Logo"
-          className="w-32 h-32 mx-auto object-contain"
-        />
-        <p className="text-white text-base leading-relaxed">
-          Welcome to your journey of discovering your soulmate, my dear. Details about your soulmate will be revealed in the next few moments.
-        </p>
-      </motion.div>
+      <AuraMessage delay={0.2}>
+        Welcome to your journey of soulmate revelation, my dear. The drawing of your soulmate's face is already ready, and I will reveal it in the next moments.
+      </AuraMessage>
       
       <div className="space-y-4">
         <motion.p className="text-purple-200 text-sm"
