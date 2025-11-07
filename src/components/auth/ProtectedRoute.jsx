@@ -2,8 +2,6 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
-const publicRoutes = ['/login', '/signup', '/resetpassword', '/onboarding', '/quizonboarding', '/paywall'];
-
 export function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
   const location = useLocation();
@@ -16,9 +14,7 @@ export function ProtectedRoute({ children }) {
     );
   }
 
-  const isPublicRoute = publicRoutes.some(route => location.pathname.startsWith(route));
-
-  if (!user && !isPublicRoute) {
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
